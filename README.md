@@ -10,7 +10,6 @@ Packages Used:
     4. Url_launcher
 
 Result:
-
     <img src="screenshot_1.jpg" height="480px">
     <img src="screenshot_2.jpg" height="480px">
 
