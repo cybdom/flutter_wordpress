@@ -38,8 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         future: _postsFuture,
         builder: (context, snapshot) {
           if (snapshot.hasError)
-            return Center(
-              child: Text("Error"),
+            return Scaffold(
+              body: Center(
+                child: Text("Error"),
+              ),
             );
           if (snapshot.hasData) {
             return Scaffold(
