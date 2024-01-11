@@ -1,16 +1,6 @@
 class SinglePost {
   final String featuredImage, title, date, url, content, avatarURL, authorName;
 
-  SinglePost({
-    this.authorName,
-    this.content,
-    this.avatarURL,
-    this.featuredImage,
-    this.title,
-    this.date,
-    this.url,
-  });
-
   factory SinglePost.fromJson(Map<String, dynamic> json) {
     return SinglePost(
       authorName: json['author']['name'],
@@ -22,4 +12,13 @@ class SinglePost {
       url: json['URL'],
     );
   }
+
+  SinglePost(
+      {required this.featuredImage,
+      required this.title,
+      required this.date,
+      required this.url,
+      required this.content,
+      required this.avatarURL,
+      required this.authorName});
 }

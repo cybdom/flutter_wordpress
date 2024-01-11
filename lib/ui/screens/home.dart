@@ -19,12 +19,12 @@ List<SinglePost> parsePosts(response) {
 }
 
 Future<List<SinglePost>> _getPosts() async {
-  final response = await http.get(baseUrl);
+  final response = await http.get(Uri.https(baseUrl));
   return compute(parsePosts, response.body);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Future<List<SinglePost>> _postsFuture;
+  late Future<List<SinglePost>> _postsFuture;
   @override
   void initState() {
     super.initState();
@@ -51,8 +51,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   "Cybdom Blog",
                   style: Theme.of(context)
                       .textTheme
-                      .title
-                      .copyWith(color: Colors.black),
+                      .titleLarge
+                      ?.copyWith(color: Colors.black),
                 ),
                 actions: <Widget>[
                   Padding(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(9),
                       child: Image.network(
-                        "${snapshot.data[0].avatarURL}",
+                        "${snapshot.data![0].avatarURL}",
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -75,17 +75,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: PageView.builder(
                       controller: PageController(viewportFraction: .76),
                       scrollDirection: Axis.horizontal,
-                      itemCount: snapshot.data.length,
+                      itemCount: snapshot.data?.length,
                       itemBuilder: (context, i) => OverlayedContainer(
-                        authorAvatar: "${snapshot.data[i].avatarURL}",
-                        author: "${snapshot.data[i].authorName}",
-                        image: "${snapshot.data[i].featuredImage}",
-                        title: "${snapshot.data[i].title}",
+                        authorAvatar: "${snapshot.data![i].avatarURL}",
+                        author: "${snapshot.data![i].authorName}",
+                        image: "${snapshot.data![i].featuredImage}",
+                        title: "${snapshot.data![i].title}",
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                PostScreen(postData: snapshot.data[i]),
+                                PostScreen(postData: snapshot.data![i]),
                           ),
                         ),
                       ),
@@ -98,21 +98,21 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: <Widget>[
                         Text(
                           "All Posts",
-                          style: Theme.of(context).textTheme.subtitle,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                         ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemCount: 5,
                           itemBuilder: (context, i) => PostContainer(
-                            author: "${snapshot.data[i].authorName}",
-                            image: "${snapshot.data[i].featuredImage}",
-                            title: "${snapshot.data[i].title}",
+                            author: "${snapshot.data![i].authorName}",
+                            image: "${snapshot.data![i].featuredImage}",
+                            title: "${snapshot.data![i].title}",
                             onTap: () => Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) =>
-                                    PostScreen(postData: snapshot.data[i]),
+                                    PostScreen(postData: snapshot.data![i]),
                               ),
                             ),
                           ),

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
 class OverlayedContainer extends StatelessWidget {
-  final String title, image, author,authorAvatar;
-  final onTap;
+  final String title, image, author, authorAvatar;
 
   const OverlayedContainer(
-      {Key key, this.title, this.image, this.author, this.onTap, this.authorAvatar})
-      : super(key: key);
+      {super.key,
+      required this.title,
+      required this.image,
+      required this.author,
+      required this.onTap,
+      required this.authorAvatar});
+  final onTap;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,8 +34,8 @@ class OverlayedContainer extends StatelessWidget {
               "$title",
               style: Theme.of(context)
                   .textTheme
-                  .subtitle
-                  .copyWith(color: Colors.white),
+                  .titleSmall
+                  ?.copyWith(color: Colors.white),
             ),
             Row(
               children: <Widget>[
@@ -51,8 +56,8 @@ class OverlayedContainer extends StatelessWidget {
                     "$author",
                     style: Theme.of(context)
                         .textTheme
-                        .subtitle
-                        .copyWith(color: Colors.white),
+                        .titleSmall
+                        ?.copyWith(color: Colors.white),
                   ),
                 )
               ],

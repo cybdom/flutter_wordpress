@@ -6,7 +6,8 @@ import 'package:wordpress_flutter/models/single_post.dart';
 class PostScreen extends StatelessWidget {
   final SinglePost postData;
 
-  const PostScreen({Key key, @required this.postData}) : super(key: key);
+  const PostScreen({super.key, required this.postData});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -70,16 +71,15 @@ class PostScreen extends StatelessWidget {
                           ),
                           title: Text(
                             "${postData.authorName}",
-                            style: Theme.of(context).textTheme.subtitle,
+                            style: Theme.of(context).textTheme.titleSmall,
                           ),
                         ),
                         SizedBox(height: 9),
                         Html(
                           data: "${postData.content}",
-                          showImages: true,
-                          onLinkTap: (url) async {
-                            if (await canLaunch(url)) {
-                              await launch(url);
+                          onLinkTap: (url, _, __) async {
+                            if (url != null) {
+                              await launchUrl(Uri.parse(url));
                             } else {
                               throw 'Could not launch $url';
                             }

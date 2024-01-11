@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 
 class PostContainer extends StatelessWidget {
   final onTap;
-  final String title, author,image;
+  final String title, author, image;
 
-  const PostContainer({Key key, this.onTap, this.title, this.author, this.image}) : super(key: key);
+  const PostContainer(
+      {super.key,
+      required this.onTap,
+      required this.title,
+      required this.author,
+      required this.image});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -20,10 +25,13 @@ class PostContainer extends StatelessWidget {
           children: <Widget>[
             Text(
               "$title",
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.titleMedium,
             ),
             SizedBox(height: 5),
-            Text("$author",style: Theme.of(context).textTheme.body2,),
+            Text(
+              "$author",
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         ),
       ),
